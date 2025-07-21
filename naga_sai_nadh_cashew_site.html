@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Naga Sai Nadh Cashew</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f8f8f8; }
+    header { background: #8B4513; color: white; padding: 1rem; text-align: center; }
+    .container { padding: 2rem; }
+    .products { display: flex; flex-wrap: wrap; gap: 2rem; justify-content: center; }
+    .product { background: white; padding: 1rem; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); width: 250px; text-align: center; }
+    .product img { width: 100%; height: 150px; object-fit: cover; }
+    .product h3 { margin: 0.5rem 0; }
+    .cart-form { margin-top: 2rem; background: white; padding: 1rem; border-radius: 8px; }
+    footer { background: #8B4513; color: white; text-align: center; padding: 1rem; margin-top: 2rem; }
+    button { padding: 0.5rem 1rem; background: green; color: white; border: none; border-radius: 4px; cursor: pointer; }
+    input, select, textarea { width: 100%; padding: 0.5rem; margin: 0.5rem 0; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Naga Sai Nadh Cashew</h1>
+    <p>Pure and premium cashews directly from Andhra farms</p>
+  </header>
+
+  <div class="container">
+    <h2>Our Products</h2>
+    <div class="products">
+      <div class="product">
+        <img src="https://example.com/w320.jpg" alt="W320 Cashew">
+        <h3>W320 Cashew</h3>
+        <p>₹950 / kg</p>
+        <button onclick="addToCart('W320 Cashew', 950)">Add to Cart</button>
+      </div>
+      <div class="product">
+        <img src="https://example.com/w240.jpg" alt="W240 Cashew">
+        <h3>W240 Cashew</h3>
+        <p>₹1050 / kg</p>
+        <button onclick="addToCart('W240 Cashew', 1050)">Add to Cart</button>
+      </div>
+    </div>
+
+    <div class="cart-form">
+      <h2>Place Order</h2>
+      <form onsubmit="sendWhatsAppMessage(event)">
+        <label>Name:</label>
+        <input type="text" id="name" required>
+        <label>Phone Number (with country code):</label>
+        <input type="text" id="phone" required>
+        <label>Address:</label>
+        <textarea id="address" required></textarea>
+        <label>Selected Product:</label>
+        <input type="text" id="selectedProduct" readonly required>
+        <label>Price (₹):</label>
+        <input type="text" id="price" readonly required>
+        <button type="submit">Place Order</button>
+      </form>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Naga Sai Nadh Cashew. All rights reserved.</p>
+  </footer>
+
+  <script>
+    function addToCart(product, price) {
+      document.getElementById('selectedProduct').value = product;
+      document.getElementById('price').value = price;
+    }
+
+    function sendWhatsAppMessage(event) {
+      event.preventDefault();
+      const name = document.getElementById('name').value;
+      const phone = document.getElementById('phone').value;
+      const address = document.getElementById('address').value;
+      const product = document.getElementById('selectedProduct').value;
+      const price = document.getElementById('price').value;
+      
+      const message = `Hi, I'm ${name}. I would like to order ${product} for ₹${price}.\nAddress: ${address}`;
+      const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+
+      window.open(url, '_blank');
+    }
+  </script>
+</body>
+</html>
